@@ -132,6 +132,9 @@ t_ignore = ' \t'
 # (JUAN CAMILO) Escribir aquí las expresiones regulares para ID y NUMBER
 
 
+# For comments
+# (KAREN) Escribir aquí las expresiones regulares para los comentarios
+
 def t_error(t):
     print("Lexical error: " + str(t.value[0]))
     t.lexer.skip(1)
