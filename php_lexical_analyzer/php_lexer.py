@@ -3,31 +3,24 @@ import sys
 
 # Tokens list
 tokens = (
+    # PHP Header
+    'HEADER',
     # Reserverd words
     'BREAK',
     'ENDSWITCH',
     'FUNCTION',
     'INCLUDE',
-    'OR',
     'REQUIRE',
-    'THROW',
     'VAR',
     'CONST',
     'DO',
     'ENDWHILE',
-    'FINALLY',
-    'GLOBAL',
     'PRINT',
     'WHILE',
-    'AND',
     'CASE',
-    'CONTINUE',
     'ECHO',
     'ENDFOR',
     'RETURN',
-    'TRY',
-    'XOR',
-    'CATCH',
     'ELSE',
     'ENDFOREACH',
     'FOR',
@@ -39,24 +32,29 @@ tokens = (
     'ENDIF',
     'FOREACH',
     'SWITCH',
-
-    # Symbols
+    # Arithmetic operators
+    'EQUAL',
     'PLUS',
     'PLUSPLUS',
-    # 'PLUSEQUAL',
+    'PLUSEQUAL',
     'MINUS',
     'MINUSMINUS',
-    # 'MINUSEQUAL',
+    'MINUSEQUAL',
     'TIMES',
     'DIVIDE',
+    # Logical operators
+    'OR',
+    'AND',
+    'XOR',
+    # Relational operators
     'LESS',
     'LESSEQUAL',
     'GREATER',
     'GREATEREQUAL',
-    'EQUAL',
     'DEQUAL',
     'DISTINT',
     'ISEQUAL',
+    # Symbols
     'SEMICOLON',
     'COMMA',
     'LPAREN',
@@ -69,22 +67,41 @@ tokens = (
     'AMPERSANT',
     'DOT',
     'DOLAR'
-    'HEADER'
-
     # Others
     'ID',
     'NUMBER'
 )
 
-# Regular expressions rules for a simple tokens
+# REGULAR EXPRESSIONS RULES FOR SIMPLE TOKENS
+# For PHP Header
+t_HEADER = r'<?php'
+
+# For arithmetic operators
+t_EQUAL = r'='
 t_PLUS = r'\+'
+t_PLUSPLUS = r'\++'
+t_PLUSEQUAL = r'\+='
 t_MINUS = r'-'
+t_MINUSMINUS = r'--'
+t_MINUSEQUAL = r'-='
 t_TIMES = r'\*'
 t_DIVIDE = r'/'
-t_EQUAL = r'='
-t_DISTINT = r'!'
+
+# For logical operators
+t_OR = r'or'
+t_AND = r'and'
+t_XOR = r'xor'
+
+# For relational operators
 t_LESS = r'<'
+t_LEESEQUAL = r'<='
 t_GREATER = r'>'
+t_GREATEREQUAL = r'>='
+t_DEQUAL = r'!='
+t_DISTINT = r'!'
+t_ISEQUAL = r'/=='
+
+# For symbols
 t_SEMICOLON = ';'
 t_COMMA = r','
 t_LPAREN = r'\('
@@ -97,4 +114,6 @@ t_COLON = r':'
 t_AMPERSANT = r'\&'
 t_DOT = r'\.'
 t_DOLAR = r'$'
-t_HEADER = r'<?php'
+
+# To ignore line breaks
+t_ignore = ' \t'
