@@ -1,37 +1,10 @@
 import ply.lex as lex
-import sys
 
 # Tokens list
 tokens = (
-    # PHP Header
-    'HEADER',
-    # Reserverd words
-    'BREAK',
-    'ENDSWITCH',
-    'FUNCTION',
-    'INCLUDE',
-    'REQUIRE',
-    'VAR',
-    'CONST',
-    'DO',
-    'ENDWHILE',
-    'PRINT',
-    'WHILE',
-    'CASE',
-    'ECHO',
-    'ENDFOR',
-    'RETURN',
-    'ELSE',
-    'ENDFOREACH',
-    'FOR',
-    'IF',
-    'NAMESPACE',
-    'AS',
-    'DEFAULT',
-    'ELSEIF',
-    'ENDIF',
-    'FOREACH',
-    'SWITCH',
+    # PHP main tag
+    'OPENMAINTAG',
+    'CLOSEMAINTAG'
     # Arithmetic operators
     'EQUAL',
     'PLUS',
@@ -65,16 +38,45 @@ tokens = (
     'RBLOCK',
     'COLON',
     'AMPERSANT',
+    'QUOTES',
     'DOT',
     'DOLAR'
+    # Reserverd words
+    'BREAK',
+    'ENDSWITCH',
+    'FUNCTION',
+    'INCLUDE',
+    'REQUIRE',
+    'VAR',
+    'CONST',
+    'DO',
+    'ENDWHILE',
+    'PRINT',
+    'WHILE',
+    'CASE',
+    'ECHO',
+    'ENDFOR',
+    'RETURN',
+    'ELSE',
+    'ENDFOREACH',
+    'FOR',
+    'IF',
+    'NAMESPACE',
+    'AS',
+    'DEFAULT',
+    'ELSEIF',
+    'ENDIF',
+    'FOREACH',
+    'SWITCH',
     # Others
     'ID',
     'NUMBER'
 )
 
 # REGULAR EXPRESSIONS RULES FOR SIMPLE TOKENS
-# For PHP Header
-t_HEADER = r'<?php'
+# For PHP main tag
+t_OPENMAINTAG = r'<?php'
+T_CLOSEMAINTAG = r'?>'
 
 # For arithmetic operators
 t_EQUAL = r'='
@@ -112,8 +114,46 @@ t_LBLOCK = r'{'
 t_RBLOCK = r'}'
 t_COLON = r':'
 t_AMPERSANT = r'\&'
+t_QUOTES = r'"'
 t_DOT = r'\.'
 t_DOLAR = r'$'
 
 # To ignore line breaks
 t_ignore = ' \t'
+
+# For reserved words
+# (KAREN) Escribir aquí las expresiones regulares para las palabras reservadas que le tocan
+
+
+# (JUAN CAMILO) Escribir aquí las expresiones regulares para las palabras reservadas que le tocan
+
+
+# For others (ID and NUMBER)
+# (JUAN CAMILO) Escribir aquí las expresiones regulares para ID y NUMBER
+
+
+def t_error(t):
+    print("Lexical error: " + str(t.value[0]))
+    t.lexer.skip(1)
+
+
+def analyze(code, lexer):
+    lexer.input(code)
+    while True:
+        token = lexer.token()
+        if not token:
+            break
+        print(token)
+
+
+if __name__ == '__main__':
+    # Reads the file with code and print it
+    file = 'code.php'
+    f = open(file, 'r')
+    code = f.read()
+    print("This is the analyzed code\n")
+    print(code)
+    # Performs lexical analysis of the code
+    lexer = lex.lex()
+    lexer.input(code)
+    analyze(code, lexer)
