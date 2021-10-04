@@ -10,7 +10,7 @@
         }
 
         $average_element_index = floor(($left + $right)/2);
-        $average_element = $array[$average_element_index]
+        $average_element = $array[$average_element_index];
 
         $comparision_result = strcmp($search,$average_element);
 
@@ -28,7 +28,7 @@
             else
             {
                 $right = $average_element_index + 1;
-                return RecursiveBinarySearch($array,$search,$left,$right)
+                return RecursiveBinarySearch($array,$search,$left,$right);
             }
         }
     }
