@@ -123,7 +123,57 @@ t_ignore = ' \t'
 
 # For reserved words
 # (KAREN) Escribir aquí las expresiones regulares para las palabras reservadas que le tocan
+def t_BREAK(t):
+    r"""break"""
+    return t
 
+def t_ENDSWITCH(t):
+    r"""endswitch"""
+    return t
+
+def t_FUNCTION(t):
+    r"""function"""
+    return t
+
+def t_INCLUDE(t):
+    r"""include"""
+    return t
+
+def t_REQUIRE(t):
+    r"""require"""
+    return t
+
+def t_VAR(t):
+    r"""var"""
+    return t
+
+def t_CONST(t):
+    r"""const"""
+    return t
+
+def t_DO(t):
+    r"""do"""
+    return t
+
+def t_ENDWHILE(t):
+    r"""endwhile"""
+    return t
+
+def t_PRINT(t):
+    r"""print"""
+    return t
+
+def t_WHILE(t):
+    r"""while"""
+    return t
+
+def t_CASE(t):
+    r"""case"""
+    return t
+
+def t_ECHO(t):
+    r"""echo"""
+    return t
 
 # (JUAN CAMILO) Escribir aquí las expresiones regulares para las palabras reservadas que le tocan
 
@@ -134,11 +184,19 @@ t_ignore = ' \t'
 
 # For comments
 # (KAREN) Escribir aquí las expresiones regulares para los comentarios
+# # one line comment
+def t_comments_oneline(t):
+    r"""#(.)*?\n"""
+    t.lexer.lineo += 1
+
+# /* multi-line comment */
+def t_comments_multiline(t):
+    r"""/\*(.|\n)*?\*/"""
+    t.lexer.lineno += t.value.count('\n')
 
 def t_error(t):
     print("Lexical error: " + str(t.value[0]))
     t.lexer.skip(1)
-
 
 def analyze(code, lexer):
     lexer.input(code)
@@ -147,7 +205,6 @@ def analyze(code, lexer):
         if not token:
             break
         print(token)
-
 
 if __name__ == '__main__':
     # Reads the file with code and print it
