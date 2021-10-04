@@ -2,9 +2,6 @@ import ply.lex as lex
 
 # Tokens list
 tokens = (
-    # PHP main tag
-    'OPENMAINTAG',
-    'CLOSEMAINTAG'
     # Arithmetic operators
     'EQUAL',
     'PLUS',
@@ -28,6 +25,7 @@ tokens = (
     'DISTINT',
     'ISEQUAL',
     # Symbols
+    'QUESTION',
     'SEMICOLON',
     'COMMA',
     'LPAREN',
@@ -40,7 +38,7 @@ tokens = (
     'AMPERSANT',
     'QUOTES',
     'DOT',
-    'DOLAR'
+    'DOLAR',
     # Reserverd words
     'BREAK',
     'ENDSWITCH',
@@ -74,9 +72,6 @@ tokens = (
 )
 
 # REGULAR EXPRESSIONS RULES FOR SIMPLE TOKENS
-# For PHP main tag
-t_OPENMAINTAG = r'<?php'
-T_CLOSEMAINTAG = r'?>'
 
 # For arithmetic operators
 t_EQUAL = r'='
@@ -96,14 +91,15 @@ t_XOR = r'xor'
 
 # For relational operators
 t_LESS = r'<'
-t_LEESEQUAL = r'<='
+t_LESSEQUAL = r'<='
 t_GREATER = r'>'
 t_GREATEREQUAL = r'>='
 t_DEQUAL = r'!='
 t_DISTINT = r'!'
-t_ISEQUAL = r'/=='
+t_ISEQUAL = r'=='
 
 # For symbols
+t_QUESTION = r'\?'
 t_SEMICOLON = ';'
 t_COMMA = r','
 t_LPAREN = r'\('
@@ -116,7 +112,7 @@ t_COLON = r':'
 t_AMPERSANT = r'\&'
 t_QUOTES = r'"'
 t_DOT = r'\.'
-t_DOLAR = r'$'
+t_DOLAR = r'\$'
 
 # To ignore line breaks
 t_ignore = ' \t'
@@ -200,7 +196,7 @@ def t_ECHO(t):
 # (KAREN) Escribir aquí las expresiones regulares para los comentarios
 # # one line comment
 def t_comments_oneline(t):
-    r"""#(.)*?\n"""
+    r"""\#(.)*?\n"""
     t.lexer.lineo += 1
 
 
@@ -229,7 +225,7 @@ if __name__ == '__main__':
     file = 'code.php'
     f = open(file, 'r')
     code = f.read()
-    print("This is the analyzed code\n")
+    print("\nThis is the analyzed code\n")
     print(code)
     # Performs lexical analysis of the code
     lexer = lex.lex()
