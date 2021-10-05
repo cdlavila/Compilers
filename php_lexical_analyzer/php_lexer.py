@@ -197,7 +197,7 @@ def t_ECHO(t):
 # # one line comment
 def t_comments_oneline(t):
     r"""\#(.)*?\n"""
-    t.lexer.lineo += 1
+    t.lexer.lineno += 1
 
 
 # /* multi-line comment */
