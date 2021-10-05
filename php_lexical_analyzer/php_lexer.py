@@ -114,7 +114,14 @@ t_QUOTES = r'"'
 t_DOT = r'\.'
 t_DOLAR = r'\$'
 
+
 # To ignore line breaks
+def t_newline(t):
+    r"""\n+"""
+    t.lexer.lineno += len(t.value)
+
+
+# To ignore spaces
 t_ignore = ' \t'
 
 
@@ -192,20 +199,25 @@ def t_ECHO(t):
 # (JUAN CAMILO) Escribir aquí las expresiones regulares para ID y NUMBER
 
 
-# For comments
-# (KAREN) Escribir aquí las expresiones regulares para los comentarios
-# # one line comment
+# For one line comment with #
 def t_comments_oneline(t):
     r"""\#(.)*?\n"""
     t.lexer.lineno += 1
 
 
-# /* multi-line comment */
+# For one line comment with //
+def t_comments_oneline2(t):
+    r"""//(.)*?\n"""
+    t.lexer.lineno += 1
+
+
+# For multi-line comment /*...*/
 def t_comments_multiline(t):
     r"""/\*(.|\n)*?\*/"""
     t.lexer.lineno += t.value.count('\n')
 
 
+# For lexical errors
 def t_error(t):
     print("Lexical error: " + str(t.value[0]))
     t.lexer.skip(1)
