@@ -243,8 +243,8 @@ def t_ELSEIF(t):
 
 
 def t_ENDIF(t):
-     r"""endif"""
-     return t
+    r"""endif"""
+    return t
 
 
 def t_FOREACH(t):
