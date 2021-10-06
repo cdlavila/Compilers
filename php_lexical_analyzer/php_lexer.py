@@ -38,8 +38,8 @@ tokens = (
     'AMPERSANT',
     'QUOTES',
     'DOT',
-    'DOLAR',
     # Reserverd words
+    'PHP',
     'BREAK',
     'ENDSWITCH',
     'FUNCTION',
@@ -68,7 +68,8 @@ tokens = (
     'SWITCH',
     # Others
     'ID',
-    'NUMBER'
+    'NUMBER',
+    'FUNCTION_NAME'
 )
 
 # REGULAR EXPRESSIONS RULES FOR SIMPLE TOKENS
@@ -112,7 +113,6 @@ t_COLON = r':'
 t_AMPERSANT = r'\&'
 t_QUOTES = r'"'
 t_DOT = r'\.'
-t_DOLAR = r'\$'
 
 
 # To ignore line breaks
@@ -126,7 +126,11 @@ t_ignore = ' \t'
 
 
 # For reserved words
-# (KAREN) Escribir aquí las expresiones regulares para las palabras reservadas que le tocan
+def t_PHP(t):
+    r"""php"""
+    return t
+
+
 def t_BREAK(t):
     r"""break"""
     return t
@@ -257,15 +261,21 @@ def t_SWITCH(t):
     return t
 
 
-# For others (ID and NUMBER)
-
+# For others (ID, FUNCTION NAME and NUMBER)
 def t_ID(t):
-    r"""\w+(_\d\w)*"""
+    r"""(\$)\w+(_\d\w)*"""
+    return t
+
+
+def t_FUNCTION_NAME(t):
+    r"""\w+(_\d\w)*\("""
+    t.value = t.value[:-1]
+    lexer.lexpos -= 1
     return t
 
 
 def t_NUMBER(t):
-    r"""\$d(\.\d+)?"""
+    r"""\d(\.\d+)?"""
     t.value = float(t.value)
     return t
 

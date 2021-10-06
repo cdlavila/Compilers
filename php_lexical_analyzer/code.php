@@ -1,4 +1,5 @@
 <?php
+a = 3;
 # Este es un comentario de una linea
 function RecursiveBinarySearch($array, $search, $left, $right)
 // Este es otro comentario de una linea
