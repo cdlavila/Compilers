@@ -192,11 +192,82 @@ def t_ECHO(t):
     return t
 
 
-# (JUAN CAMILO) Escribir aquí las expresiones regulares para las palabras reservadas que le tocan
+def t_ENDFOR(t):
+    r"""endfor"""
+    return t
+
+
+def t_RETURN(t):
+    r"""return"""
+    return t
+
+
+def t_ELSE(t):
+    r"""else"""
+    return t
+
+
+def t_ENDFOREACH(t):
+    r"""endforeach"""
+    return t
+
+
+def t_FOR(t):
+    r"""for"""
+    return t
+
+
+def t_IF(t):
+    r"""if"""
+    return t
+
+
+def t_NAMESPACE(t):
+    r"""namespace"""
+    return t
+
+
+def t_AS(t):
+    r"""as"""
+    return t
+
+
+def t_DEFAULT(t):
+    r"""default"""
+    return t
+
+
+def t_ELSEIF(t):
+    r"""elseif"""
+    return t
+
+
+def t_ENDIF(t):
+     r"""endif"""
+     return t
+
+
+def t_FOREACH(t):
+    r"""foreach"""
+    return t
+
+
+def t_SWITCH(t):
+    r"""switch"""
+    return t
 
 
 # For others (ID and NUMBER)
-# (JUAN CAMILO) Escribir aquí las expresiones regulares para ID y NUMBER
+
+def t_ID(t):
+    r"""\w+(_\d\w)*"""
+    return t
+
+
+def t_NUMBER(t):
+    r"""\$d(\.\d+)?"""
+    t.value = float(t.value)
+    return t
 
 
 # For one line comment with #
