@@ -315,7 +315,7 @@ def analyze(code, lexer):
 
 if __name__ == '__main__':
     # Reads the file with code and print it
-    file = 'code.php'
+    file = '../code.php'
     f = open(file, 'r')
     code = f.read()
     print("\nThis is the analyzed code\n")
