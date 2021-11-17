@@ -178,62 +178,17 @@ def p_mulop(p):
     pass
 
 
-# Todo: perfecto hasta aquí
-
-def p_term_1(p):
-    """term : term mulop factor"""
+def p_term(p):
+    """term : term mulop factor
+            | factor"""
     pass
 
 
-def p_term_2(p):
-    """term : factor"""
-    pass
-
-
-def p_factor_1(p):
-    """factor : LPAREN expression RPAREN"""
-    pass
-
-
-def p_factor_2(p):
-    """factor : var"""
-    pass
-
-
-def p_factor_3(p):
-    """factor : call"""
-    pass
-
-
-def p_factor_4(p):
-    """factor : NUMBER"""
-    pass
-
-
-def p_factor_5(p):
-    """factor : ID"""
-    pass
-
-
-def p_call(p):
-    """call : ID LPAREN args RPAREN"""
-    pass
-
-
-def p_args(p):
-    """args : args_list
-            | empty
-    """
-    pass
-
-
-def p_args_list_1(p):
-    """args_list : args_list COMMA expression"""
-    pass
-
-
-def p_args_list_2(p):
-    """args_list : expression"""
+def p_factor(p):
+    """factor : LPAREN expression RPAREN
+              | var
+              | NUMBER
+              | ID"""
     pass
 
 
