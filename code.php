@@ -7,7 +7,7 @@ function RecursiveBinarySearch()
     echo "ger";
     if ($left > $right)
     {
-        return 1++;
+        return -1;
     }
     /* Este es un comentario de
     varias lineas*/
