@@ -187,8 +187,7 @@ def p_term(p):
 def p_factor(p):
     """factor : LPAREN expression RPAREN
               | var
-              | NUMBER
-              | ID"""
+              | NUMBER"""
     pass
 
 
