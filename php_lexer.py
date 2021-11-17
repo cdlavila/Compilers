@@ -1,4 +1,5 @@
 import ply.lex as lex
+import sys
 
 # Tokens list
 tokens = (
@@ -69,7 +70,9 @@ tokens = (
     # Others
     'ID',
     'NUMBER',
-    'FUNCTION_NAME'
+    'FUNCTION_NAME',
+    'OPENPHP',
+    'CLOSEPHP'
 )
 
 # REGULAR EXPRESSIONS RULES FOR SIMPLE TOKENS
@@ -131,6 +134,11 @@ def t_PHP(t):
     return t
 
 
+def t_VAR(t):
+    r"""var"""
+    return t
+
+
 def t_BREAK(t):
     r"""break"""
     return t
@@ -153,11 +161,6 @@ def t_INCLUDE(t):
 
 def t_REQUIRE(t):
     r"""require"""
-    return t
-
-
-def t_VAR(t):
-    r"""var"""
     return t
 
 
@@ -280,6 +283,16 @@ def t_NUMBER(t):
     return t
 
 
+def t_OPENPHP(t):
+    r"""<\?php"""
+    return t
+
+
+def t_CLOSEPHP(t):
+    r"""\?>"""
+    return t
+
+
 # For one line comment with #
 def t_comments_oneline(t):
     r"""\#(.)*?\n"""
@@ -313,14 +326,18 @@ def analyze(code, lexer):
         print(token)
 
 
+lexer = lex.lex()
+
 if __name__ == '__main__':
-    # Reads the file with code and print it
-    file = '../code.php'
+    if len(sys.argv) > 1:
+        file = sys.argv[1]
+    else:
+        # Reads the file with code and print it
+        file = 'code.php'
     f = open(file, 'r')
     code = f.read()
     print("\nThis is the analyzed code\n")
     print(code)
     # Performs lexical analysis of the code
-    lexer = lex.lex()
     lexer.input(code)
     analyze(code, lexer)
