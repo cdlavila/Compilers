@@ -71,6 +71,7 @@ tokens = (
     'ID',
     'NUMBER',
     'FUNCTION_NAME',
+    'TEXT',
     'OPENPHP',
     'CLOSEPHP'
 )
@@ -277,8 +278,13 @@ def t_FUNCTION_NAME(t):
     return t
 
 
+def t_TEXT(t):
+    r"""(\")\w+(_\d\w)*(\")"""
+    return t
+
+
 def t_NUMBER(t):
-    r"""\d(\.\d+)?"""
+    r"""(\-)?\d(\.\d+)?"""
     t.value = float(t.value)
     return t
 

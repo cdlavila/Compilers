@@ -11,13 +11,9 @@ def p_program(p):
     pass
 
 
-def p_declaration_list_1(p):
-    """declaration_list : declaration_list  declaration"""
-    pass
-
-
-def p_declaration_list_2(p):
-    """declaration_list : declaration"""
+def p_declaration_list(p):
+    """declaration_list : declaration_list  declaration
+                        | declaration"""
     pass
 
 
@@ -29,12 +25,7 @@ def p_declaration(p):
 
 
 def p_header_declaration(p):
-    """header_declaration : INCLUDE QUOTES ID DOT p_php QUOTES SEMICOLON"""
-    pass
-
-
-def p_php(p):
-    """p_php : PHP"""
+    """header_declaration : INCLUDE QUOTES ID DOT PHP QUOTES SEMICOLON"""
     pass
 
 
@@ -52,181 +43,114 @@ def p_var_declaration_2(p):
                         | ID EQUAL ID
                         | ID EQUAL var_declaration2
                         | ID EQUAL AMPERSANT ID COMMA var_declaration2
-                        | ID EQUAL AMPERSANT ID
-                        | ID EQUAL simple_expression COMMA var_declaration2
-                        | ID EQUAL simple_expression """
+                        | ID EQUAL AMPERSANT ID """
     pass
 
 
 def p_fun_declaration(p):
-    """fun_declaration : FUNCTION FUNCTION_NAME LPAREN params RPAREN compount_stmt"""
+    """fun_declaration : FUNCTION FUNCTION_NAME LPAREN params RPAREN fun_body"""
     pass
 
 
-def p_params_1(p):
-    """params : var_declaration2"""
+def p_params(p):
+    """params : var_declaration2
+              | empty"""
     pass
 
 
-def p_params_2(p):
-    """params : empty"""
+def p_fun_body(p):
+    """fun_body : LBLOCK local_declarations statement_list RBLOCK"""
     pass
 
 
-def p_compount_stmt(p):
-    """compount_stmt : LBLOCK local_declarations statement_list RBLOCK"""
+def p_local_declarations(p):
+    """local_declarations : local_declarations var_declaration
+                          | empty"""
     pass
 
 
-def p_local_declarations_1(p):
-    """local_declarations : local_declarations var_declaration"""
-    pass
-
-
-def p_local_declarations_2(p):
-    """local_declarations : empty"""
-    pass
-
-
-def p_statement_list_1(p):
-    """statement_list : statement_list statement"""
-    pass
-
-
-def p_statement_list_2(p):
-    """statement_list : empty"""
+def p_statement_list(p):
+    """statement_list : statement_list statement
+                      | empty"""
     pass
 
 
 def p_statement(p):
-    """statement : expression_stmt
-                | writing_stmt
-                | selection_stmt
-                | iteration_stmt
-                | return_stmt
+    """statement : expression_statament
+                | writing_statament
+                | selection_statament
+                | iteration_statament
+                | return_statament
     """
     pass
 
 
-def p_statement_block_1(p):
-    """statement_block : LBLOCK statement_list RBLOCK"""
+def p_statement_block(p):
+    """statement_block : LBLOCK statement_list RBLOCK
+                       | statement"""
     pass
 
 
-def p_statement_block_2(p):
-    """statement_block : statement"""
+def p_expression_statament(p):
+    """expression_statament : expression SEMICOLON
+                            | SEMICOLON"""
     pass
 
 
-def p_expression_stmt_1(p):
-    """expression_stmt : expression SEMICOLON"""
+def p_writing_statament(p):
+    """writing_statament : ECHO ID SEMICOLON
+                         | ECHO TEXT SEMICOLON
+                         | ECHO NUMBER SEMICOLON"""
     pass
 
 
-def p_expression_stmt_2(p):
-    """expression_stmt : SEMICOLON"""
+def p_selection_statament(p):
+    """selection_statament : IF LPAREN expression RPAREN statement_block
+                           | IF LPAREN expression RPAREN statement_block ELSE statement_block
+                           | SWITCH LPAREN ID RPAREN statement
+                           | CASE NUMBER COLON statement BREAK SEMICOLON
+                           | DEFAULT COLON statement BREAK SEMICOLON"""
     pass
 
 
-def p_writing_stmt_1(p):
-    """writing_stmt : ECHO ID SEMICOLON
-                    | ECHO NUMBER SEMICOLON
-                    """
+def p_iteration_statament(p):
+    """iteration_statament : WHILE LPAREN expression RPAREN statement_block
+                           | FOR LPAREN var_declaration2 SEMICOLON expression SEMICOLON additive_expression RPAREN statement_block"""
     pass
 
 
-def p_selection_stmt_1(p):
-    """selection_stmt : IF LPAREN expression RPAREN statement_block"""
+def p_return_statament(p):
+    """return_statament : RETURN VAR SEMICOLON
+                        | RETURN NUMBER SEMICOLON
+                        | RETURN expression SEMICOLON
+                        | RETURN FUNCTION_NAME LPAREN params RPAREN SEMICOLON"""
     pass
 
 
-def p_selection_stmt_2(p):
-    """selection_stmt : IF LPAREN expression RPAREN statement_block ELSE statement_block"""
+def p_expression(p):
+    """expression : var EQUAL expression
+                  | simple_expression"""
     pass
 
 
-def p_selection_stmt_3(p):
-    """selection_stmt : SWITCH LPAREN var RPAREN statement"""
+def p_var(p):
+    """var : ID
+           | ID LBRACKET NUMBER RBRACKET
+           | ID LBRACKET ID RBRACKET"""
     pass
 
 
-def p_selection_stmt_4(p):
-    """selection_stmt : CASE NUMBER COLON statement BREAK SEMICOLON"""
+def p_simple_expression(p):
+    """simple_expression : additive_expression relop additive_expression
+                         | additive_expression"""
     pass
 
 
-def p_selection_stmt_5(p):
-    """selection_stmt : DEFAULT COLON statement BREAK SEMICOLON"""
-    pass
-
-
-def p_iteration_stmt_1(p):
-    """iteration_stmt : WHILE LPAREN expression RPAREN statement_block"""
-    pass
-
-
-def p_iteration_stmt_2(p):
-    """iteration_stmt : FOR LPAREN var_declaration2 SEMICOLON expression SEMICOLON additive_expression RPAREN statement_block """
-    pass
-
-
-def p_return_stmt_1(p):
-    """return_stmt : RETURN SEMICOLON"""
-    pass
-
-
-def p_return_stmt_2(p):
-    """return_stmt : RETURN expression SEMICOLON"""
-    pass
-
-
-def p_return_stmt_3(p):
-    """return_stmt : RETURN FUNCTION_NAME LPAREN params RPAREN SEMICOLON"""
-    pass
-
-
-def p_expression_1(p):
-    """expression : var EQUAL expression"""
-    pass
-
-
-def p_expression_2(p):
-    """expression : simple_expression"""
-    pass
-
-
-def p_expression_3(p):
-    """expression : var EQUAL AMPERSANT ID"""
-    pass
-
-
-def p_var_1(p):
-    """var : ID"""
-    pass
-
-
-def p_var_2(p):
-    """var : ID LBRACKET ID RBRACKET"""
-    pass
-
-
-def p_var_3(p):
-    """var : ID LBRACKET NUMBER RBRACKET"""
-    pass
-
-
-def p_var_4(p):
-    """var : ID LBRACKET expression RBRACKET """
-    pass
-
-
-def p_simple_expression_1(p):
-    """simple_expression : additive_expression relop additive_expression"""
-    pass
-
-
-def p_simple_expression_2(p):
-    """simple_expression : additive_expression"""
+def p_additive_expression(p):
+    """additive_expression : additive_expression addop term
+                           | term
+                           | term MINUSMINUS
+                           | term PLUSPLUS"""
     pass
 
 
@@ -241,34 +165,20 @@ def p_relop(p):
     pass
 
 
-def p_additive_expression_1(p):
-    """additive_expression : additive_expression addop term
-
-        """
-    pass
-
-
-def p_additive_expression_2(p):
-    """additive_expression : term"""
-    pass
-
-
-def p_additive_expression_3(p):
-    """additive_expression : term MINUSMINUS"""
-    pass
-
-
-def p_additive_expression_4(p):
-    """additive_expression : term PLUSPLUS"""
-    pass
-
-
 def p_addop(p):
     """addop : PLUS
             | MINUS
     """
     pass
 
+
+def p_mulop(p):
+    """mulop : TIMES
+            | DIVIDE"""
+    pass
+
+
+# Todo: perfecto hasta aquí
 
 def p_term_1(p):
     """term : term mulop factor"""
@@ -277,12 +187,6 @@ def p_term_1(p):
 
 def p_term_2(p):
     """term : factor"""
-    pass
-
-
-def p_mulop(p):
-    """mulop : TIMES
-            | DIVIDE"""
     pass
 
 

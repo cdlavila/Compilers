@@ -1,12 +1,13 @@
 <?php
 // a = 3;
 # Este es un comentario de una linea
-function RecursiveBinarySearch($array, $search, $left, $right)
+function RecursiveBinarySearch()
 // Este es otro comentario de una linea
 {
+    echo "ger";
     if ($left > $right)
     {
-        return 1;
+        return 1++;
     }
     /* Este es un comentario de
     varias lineas*/
